@@ -46,14 +46,12 @@ const OrderManagement = () => {
 
   useEffect(() => {
     fetchOrders();
-    // const interval = setInterval(fetchOrders, 5000);
-    // return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="order-container">
       <h2 className="order-heading">📦 Received Orders</h2>
-      <button onClick={()=>{fetchOrders()}}>Refreash</button>
+      <button onClick={() => { fetchOrders() }}>Refresh</button>
 
       {loading ? (
         <p className="loading-text">Loading orders...</p>
@@ -93,8 +91,8 @@ const OrderManagement = () => {
                     className="order-item-image"
                   />
                   <span className="order-item-details">
-                    {item.qty} x {item.name} (${item.price?.toFixed(2)}) — 
-                    <strong> Total: ${item.qty * item.price?.toFixed(2)}</strong>
+                    {item.qty} x {item.name} (${Number(item.price || 0).toFixed(2)}) — 
+                    <strong> Total: ${((item.qty || 0) * (item.price || 0)).toFixed(2)}</strong>
                   </span>
                 </li>
               ))}
